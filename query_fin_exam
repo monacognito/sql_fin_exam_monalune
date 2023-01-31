@@ -1,0 +1,250 @@
+/*
+Fin Exam - LAB Database:
+Rifanni Auliya Darwin
+2502006165 
+BE75
+*/
+
+CREATE DATABASE car_showroom_db;
+USE car_showroom_db;
+#DROP DATABASE car_showroom_db;
+
+CREATE TABLE Tabel_Pembeli
+(
+    id_pembeli INT NOT NULL,
+    nama_pembeli VARCHAR(30) NOT NULL,
+	alamat_pembeli VARCHAR(30) NOT NULL,
+	kota VARCHAR(30) NOT NULL,
+	Tgl_lahir DATE NOT NULL,
+	usia INT NOT NULL,
+	no_kontak VARCHAR(13) NOT NULL,
+	email VARCHAR(20) NULL,
+	pekerjaan VARCHAR(20) NOT NULL,
+	nama_perusahaan VARCHAR(20) NULL,
+	hobi_1 VARCHAR(20) NULL,
+	hobi_2 VARCHAR(20),
+    CONSTRAINT pk_pembeli PRIMARY KEY (id_pembeli) 
+);
+
+CREATE TABLE Tabel_Mobil
+(
+	id_mobil INT NOT NULL,
+	nama_mobil VARCHAR(30) NOT NULL,
+	merk VARCHAR(10) NOT NULL,
+	transmisi VARCHAR(10) NOT NULL,
+	mesin VARCHAR(10) NOT NULL,
+	tipe_bahan_bakar VARCHAR(10) NOT NULL,
+	warna	VARCHAR(20) NULL,
+	tahun_produksi INT NOT NULL,
+	jumlah_pintu INT NOT NULL,
+	kursi	INT NOT NULL,
+	kecepatan_km_per_jam	INT NOT NULL,
+	harga_jual	INT NOT NULL,
+	stok	INT NOT NULL,
+	status_mobil	VARCHAR(15) NOT NULL,
+    
+    CONSTRAINT pk_mobil PRIMARY KEY (id_mobil)
+);
+
+
+CREATE TABLE Tabel_Transaksi
+(
+	id_transaksi INT NOT NULL,
+	id_pembeli	INT NOT NULL,
+	id_mobil	INT NOT NULL,
+	tgl_transaksi	DATE NOT NULL,
+	jumlah_pembelian	INT NOT NULL,
+	total_harga	INT NOT NULL,
+	jenis_pembayaran	VARCHAR(10) NOT NULL,
+	waktu_cicilan_bulan	 INT NULL,
+	uang_muka	INT NULL,
+	status_pembayaran VARCHAR(15) NOT NULL,
+	waktu_garansi_tahun	INT NOT NULL,
+	tgl_garansi	DATE NOT NULL,
+    CONSTRAINT pk_transaksi PRIMARY KEY (id_transaksi)
+);
+
+#Data lama Tabel pembeli
+INSERT INTO Tabel_Pembeli VALUES (15060001, "Asep Maulana", "jln. Belitung, no. 53", "Bandung", "1985-03-15", 37, "08382256373", "asep@gmail.com","Akuntan", "PT. Langit Biru", "Memasak", NULL);
+INSERT INTO Tabel_Pembeli VALUES (17600002, "Vina Muliani", "jln. Sukaluyu, no. 15", "Bandung", "1990-06-05", 32, "08572891239", "vina@gmail.com","Administrator", "PT. Indah Nusantara", "Sepeda","Membaca Novel");
+INSERT INTO Tabel_Pembeli VALUES (17600003, "Deri Sanusi", "jln. Kalidam, no. 25", "Cimahi", "1992-05-23", 30, "08572746511", "deri@gmail.com","IT Supportt", "CV.Sepatuku", NULL, NULL);
+# Tambah 8 data baru
+INSERT INTO Tabel_Pembeli VALUES (17600004, "Nabiilah Soediro", "jln. Roze, no. 1", "Semarang", "1997-06-19", 26,"081375664758", "nabiilah@gmail.com","Dancer", "Stamanara", "Menari", NULL);
+INSERT INTO Tabel_Pembeli VALUES (17600005, "Fadhil Muhammad", "jln. Maria, no. 33", "Bandung", "1998-12-11", 25,"085637556625", "fadhil@gmail.com","Cyber Security","Google", NULL, NULL);
+INSERT INTO Tabel_Pembeli VALUES (17600006, "Arvyn Rizky", "jln. Sina, no. 4", "Cimahi", "1998-11-05", 25,"082657668837", "arvyn@gmail.com","Cyber Security", "Google", "Coding", NULL);
+INSERT INTO Tabel_Pembeli VALUES (17600007, "Rifanni Auliya", "jln. Sina, no. 10", "Cimahi", "1997-06-16", 26, "081220667707", "rifa@gmail.com","Cyber Security", "Google", "Menyanyi", NULL);
+INSERT INTO Tabel_Pembeli VALUES (17600008, "Farsha Sabilla", "jln. Primroze, no. 23", "Bandung", "1996-02-21", 24, "084657262881", "farsha@gmail.com","Akuntan", "PT. Langit Biru", "Memasak", "Olahraga");
+INSERT INTO Tabel_Pembeli VALUES (17600009, "Artra Hafidz", "jln. Chestnut, no. 3", "Cimahi", "1995-03-04", 23, "087657668837", "artra@gmail.com","Akuntan", "PT. Langit Biru", "Makan", "Wisata");
+INSERT INTO Tabel_Pembeli VALUES (17600010, "Dimaz Koraag", "jln. Oleander, no. 44", "Jakarta", "1993-11-30", 30, "087653664758", "dimaz@gmail.com","Akuntan", "PT. Langit Biru", "Baca Buku", NULL);
+INSERT INTO Tabel_Pembeli VALUES (17600011, "Muhammad Amali", "jln. Lotus no. 114", "Sukabumi", "1996-01-21", 24, "084635447586", "amali@gmail.com","Akuntan", "PT. Langit Biru", NULL, NULL);
+
+#Data lama Tabel mobil
+INSERT INTO Tabel_Mobil VALUES (1200101, "Xpander Cross", "Mitsubishi", "Automatic", "4 silinder", "Bensin", "White", 2019, 5, 7, 165, 310000000, 5, "Tersedia");
+INSERT INTO Tabel_Mobil VALUES (1200102, "Xpander Cross", "Mitsubishi", "Automatic", "4 silinder", "Bensin", "Graphite Grey", 2019, 5, 7, 165, 310000000, 8, "Tersedia");
+INSERT INTO Tabel_Mobil VALUES (2190501, "Brio Satya E", "Honda", "Manual", "4 silinder", "Bensin", "Crystal Black Pearl", 2018, 5, 5, 145, 188000000, 0, "Tidak Tersedia");
+INSERT INTO Tabel_Mobil VALUES (3210801, "All New Fortuner", "Toyota", "Automatic", "4 silinder", "Bensin", "Phantom Brown", 2018, 5, 7, 190, 520000000, 2, "Tersedia");
+INSERT INTO Tabel_Mobil VALUES (4210501, "All New Terios", "Daihatsu", "Manual", "4 silinder", "Bensin", "Bronze Metallic", 2017, 5, 7, 165, 230000000, 4, "Tersedia");
+#Tambah 8 data baru
+INSERT INTO Tabel_Mobil VALUES (5784922, "BMW I8", "BMW", "Automatic", "6 silinder", "Bensin", "Jet Black", 2022, 4, 4, 200, 300000000, 5, "Tersedia");
+INSERT INTO Tabel_Mobil VALUES (6278230, "Creta", "Hyundai", "Automatic", "4 silinder", "Bensin", "Blue Lake", 2022, 5, 4, 165, 500000000, 10, "Tersedia");
+INSERT INTO Tabel_Mobil VALUES (7382830, "Raize", "Toyota", "Automatic", "4 silinder", "Bensin", "Blue Sky", 2022, 4, 5, 120, 400000000, 20, "Tersedia");
+INSERT INTO Tabel_Mobil VALUES (7382831, "Raize", "Toyota", "Automatic", "4 silinder", "Bensin", NULL, 2022, 4, 5, 120, 600000000, 15, "Tersedia");
+INSERT INTO Tabel_Mobil VALUES (8378298, "Picanto", "Kia", "Automatic", "4 silinder", "Bensin", "White Bone", 2010, 4, 4, 125, 870000000, 30, "Tersedia");
+INSERT INTO Tabel_Mobil VALUES (9387298, "Tesla Model Y", "Tesla", "Automatic", "6 silinder", "Listrik", "Black Graphite", 2022, 2, 4, 200, 460000000, 5, "Tersedia");
+INSERT INTO Tabel_Mobil VALUES (9993345, "Avanza", "Toyota", "Manual", "4 silinder", "Bensin", NULL, 2020, 4, 6, 165, 740000000, 180, "Tersedia");
+INSERT INTO Tabel_Mobil VALUES (9294652, "Rush", "Toyota", "Manual", "4 silinder", "Bensin", "Pinky", 2020, 4, 7, 165, 980000000, 180, "Tersedia");
+
+#Data lama Tabel transaksi 
+INSERT INTO Tabel_Transaksi VALUES (211226001, 15060001, 1200101, "2021-12-26", 1 ,310000000, "Tunai", NULL, NULL, "Lunas", 5, "2026-12-26");
+INSERT INTO Tabel_Transaksi VALUES (211225001, 17600006, 1200102, "2022-10-05", 2 , 620000000, "Cicilan", 36, 10000000, "Belum Lunas", 5, "2027-10-05");
+INSERT INTO Tabel_Transaksi VALUES (211228001, 15060001, 3210801, "2022-11-08", 1, 520000000, "Tunai", NULL, NULL, "Lunas", 3, "2025-11-08");
+#Tambah 8 data baru
+INSERT INTO Tabel_Transaksi VALUES (211229001, 17600004, 7382831, "2022-10-10", 2, 120000000, "Cicilan", 36, 1000000, "Belum Lunas ", 3, "2025-11-08");
+INSERT INTO Tabel_Transaksi VALUES (211221001, 17600005, 8378298, "2022-10-11", 1, 870000000, "Tunai", NULL, NULL, "Lunas", 3, "2025-11-08");
+INSERT INTO Tabel_Transaksi VALUES (211221101, 17600006, 6278230, "2022-12-12", 1, 500000000, "Tunai", NULL, NULL, "Lunas", 3, "2025-11-08");
+INSERT INTO Tabel_Transaksi VALUES (211221201, 17600007, 9387298, "2022-12-13", 1, 460000000, "Tunai", NULL, NULL, "Lunas", 3, "2025-11-08");
+INSERT INTO Tabel_Transaksi VALUES (211221301, 17600008, 7382830, "2022-12-14", 1, 400000000, "Tunai", NULL, NULL, "Lunas", 3, "2025-11-08");
+INSERT INTO Tabel_Transaksi VALUES (211221401, 17600009, 9294652, "2023-01-01", 1, 980000000, "Cicilan", 24, 50000000, "Belum Lunas", 3, "2025-11-08");
+INSERT INTO Tabel_Transaksi VALUES (211221501, 17600010, 9993345, "2023-01-05", 1, 740000000, "Tunai", NULL, NULL, "Lunas", 3, "2025-11-08");
+INSERT INTO Tabel_Transaksi VALUES (211221601, 17600011, 5784922, "2023-01-24", 1, 300000000, "Cicilan", 12, 1000000, "Belum Lunas", 3, "2025-11-08");
+
+#WHERE - And - Or
+-- Tabel Pembeli
+SELECT * FROM Tabel_Pembeli WHERE pekerjaan = "Cyber Security" AND (kota = "Bandung" OR kota = "Cimahi");
+-- Tabel Transaksi
+SELECT * FROM Tabel_Transaksi WHERE tgl_transaksi >= "2023-01-01" AND (status_pembayaran = "Lunas" OR total_harga >= 500000000);
+
+#WHERE - Not - Like
+-- Tabel Pembeli
+-- Yang nama awalnya dari A gk muncul
+SELECT * FROM Tabel_Pembeli WHERE nama_pembeli  NOT LIKE "A%"; 
+-- Tabel Mobil
+SELECT * FROM Tabel_Mobil WHERE nama_mobil NOT LIKE "R%";
+
+#WHERE Like In
+-- Tabel Pembeli
+SELECT * FROM Tabel_Pembeli WHERE nama_pembeli LIKE "A%" AND kota IN ("Cimahi");
+-- Tabel Mobil
+SELECT * FROM Tabel_Mobil WHERE nama_mobil like "R%" AND tahun_produksi IN (2020);
+
+#WHERE- Not - Or - In
+-- Tabel Pembeli
+SELECT * FROM Tabel_Pembeli WHERE NOT (kota = "Bandung" OR kota IN ("Cimahi")); 
+-- Tabel Mobil
+SELECT * FROM Tabel_Mobil WHERE NOT (tahun_produksi = "2022" OR kecepatan_km_per_jam IN ("165")); 
+
+#Membuat tabel pegawai
+CREATE table pegawai
+(
+	id_pegawai INT NOT NULL,
+	nama_pegawai VARCHAR(30) NOT NULL,
+	pemberian_pelaporan_kepada INT NULL,
+	CONSTRAINT pk_pegawai PRIMARY KEY (id_pegawai)
+);
+
+#Mengisi tabel pegawai dengan 5 data
+INSERT INTO pegawai VALUES (1, "Nikolai Gogol", NULL);
+INSERT INTO pegawai VALUES (2, "Fyodor Dostoevsky", 1);
+INSERT INTO pegawai VALUES (3, "Fitzgerald", 1);
+INSERT INTO pegawai VALUES (4, "Lucy Montgomery", 2);
+INSERT INTO pegawai VALUES (5, "Sigma", 2);
+
+#Inner Join
+SELECT nama_pembeli, no_kontak, tgl_transaksi,id_mobil,status_pembayaran FROM Tabel_Pembeli p 
+INNER JOIN Tabel_Transaksi t ON  p.id_pembeli = t.id_pembeli;
+
+#Left Join
+SELECT id_transaksi, nama_mobil, total_harga, status_pembayaran, tgl_garansi 
+FROM Tabel_Transaksi t LEFT JOIN Tabel_Mobil m ON t.id_mobil = m.id_mobil;
+
+#Right Join
+SELECT p.id_pembeli, nama_pembeli, alamat_pembeli, kota, no_kontak
+FROM Tabel_Pembeli p RIGHT JOIN Tabel_Transaksi t ON p.id_pembeli = t.id_pembeli;
+
+# Full outer
+-- harus diakalin pake union
+SELECT p.id_pembeli, p.nama_pembeli, p.alamat_pembeli nama_pembeli, no_kontak, email, kota
+FROM Tabel_Pembeli p LEFT JOIN Tabel_Transaksi t
+ON p.id_pembeli = t.id_pembeli
+UNION
+SELECT p.id_pembeli, p.nama_pembeli, p.alamat_pembeli nama_pembeli, no_kontak, email, kota
+FROM Tabel_Pembeli p RIGHT JOIN Tabel_Transaksi t
+ON p.id_pembeli = t.id_pembeli;
+
+#Self Join
+SELECT p.id_pegawai, p.nama_pegawai, p.pemberian_pelaporan_kepada, k.nama_pegawai
+FROM pegawai p JOIN pegawai k ON p.pemberian_pelaporan_kepada = k.id_pegawai;
+
+#Multiple Join
+SELECT tgl_transaksi, id_transaksi, p.nama_pembeli, m.nama_mobil, total_harga, waktu_cicilan_bulan, uang_muka, status_pembayaran FROM Tabel_Transaksi as t
+inner join 
+Tabel_Pembeli as p
+on t.id_pembeli = p.id_pembeli
+inner join
+Tabel_Mobil m
+on t.id_mobil = m.id_mobil
+ORDER BY tgl_transaksi asc;
+
+#Rename Table
+RENAME TABLE Tabel_Pembeli TO pembeli_moment;
+RENAME TABLE pembeli_moment TO Tabel_Pembeli;
+-- Balikin lagi ke nama awal
+RENAME TABLE pegawai TO pegawai_moment;
+RENAME TABLE pegawai_moment TO pegawai;
+
+#Ubah type data
+ALTER TABLE Tabel_mobil MODIFY jumlah_pintu CHAR(2);
+ALTER TABLE Tabel_Transaksi MODIFY total_harga VARCHAR(20);
+
+#Alter nama kolom
+ALTER TABLE Tabel_Pembeli CHANGE email surel VARCHAR(20);
+ALTER TABLE Tabel_Transaksi CHANGE total_harga total INT;
+
+#Ganti posisi
+ALTER TABLE Tabel_Pembeli MODIFY no_kontak VARCHAR(13) AFTER nama_pembeli;
+ALTER TABLE Tabel_Transaksi MODIFY tgl_transaksi DATE AFTER id_transaksi;
+
+#Tambah tabel
+ALTER TABLE Tabel_Pembeli
+ADD hobi_3 VARCHAR(20) AFTER hobi_2;
+ALTER TABLE pegawai
+ADD hobi VARCHAR (20) AFTER pemberian_pelaporan_kepada;
+
+#Delete table
+ALTER TABLE Tabel_Pembeli
+DROP hobi_3;
+ALTER TABLE pegawai
+DROP hobi;
+
+#Add FK
+ALTER TABLE Tabel_Transaksi
+add CONSTRAINT fk_pembeli foreign key (id_pembeli) references Tabel_Pembeli (id_pembeli),
+add CONSTRAINT fk_mobil foreign key (id_mobil) references Tabel_Mobil (id_mobil);
+
+#Transaction
+## Kesatu
+START TRANSACTION;
+INSERT INTO Tabel_Transaksi VALUES (211221603, "2023-01-30", 17600007, 5784922,  1, "300000000", "Tunai", NULL, NULL, "Lunas", 5, "2028-01-30");
+UPDATE Tabel_Mobil set stok = stok - 1
+WHERE id_mobil = 5784922;
+COMMIT;
+## Kedua
+START TRANSACTION;
+INSERT INTO Tabel_Transaksi VALUES (211221604, "2023-01-30", 17600005, 9387298,  1, "460000000", "Tunai", NULL, NULL, "Lunas", 5, "2028-01-30");
+UPDATE Tabel_Mobil SET stok = stok - 1
+WHERE id_mobil = 9387298;
+COMMIT;
+
+
+# Nambah indeks sama show
+-- Tabel Pembeli
+ALTER TABLE Tabel_Pembeli
+ADD INDEX p_info(id_pembeli, nama_pembeli, no_kontak);
+-- Tabel Mobil
+ALTER TABLE Tabel_Mobil
+ADD INDEX m_info(id_mobil, nama_mobil, stok);
+
+-- Show Index Tabel_Pembeli
+SHOW INDEXES FROM Tabel_Pembeli;
+-- Show Index Tabel_Mobil
+SHOW INDEXES FROM Tabel_Mobil;
